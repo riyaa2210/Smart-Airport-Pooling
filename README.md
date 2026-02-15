@@ -1,200 +1,144 @@
-✈️ Smart Airport Pooling – 
+🚖 Ride Pooling System – FastAPI (Async)
 
-📌 Overview-
+A high-performance Async Ride Pooling Backend System built using FastAPI, PostgreSQL, and SQLAlchemy 2.0 (Async) with support for concurrency control using row-level locking.
 
-This project is a backend implementation of a ride pooling system for airport transfers. The system: Accepts ride requests , Matches rides to available cabs , Ensures safe concurrent seat allocation , Calculates dynamic fare , Prevents overbooking using database-level locking , Built as part of a Backend Engineer Internship Assignment.
+🚀 Tech Stack
 
-🏗 System Design-
-1)Core Components
+Backend: FastAPI (Async REST API)
 
-Ride Service
+Database: PostgreSQL
 
-Creates ride requests
+ORM: SQLAlchemy 2.0 (Async)
 
-Stores pickup/drop coordinates
+Driver: asyncpg
 
-Tracks seat & luggage requirements
+Concurrency Control: Row-Level Locks
 
-Maintains ride status
-
-Cab Service
-
-Registers new cabs
-
-Tracks seat availability
-
-Stores current location
-
-Pooling Engine
-
-Groups pending rides
-
-Matches with nearest available cabs
-
-Uses distance-based filtering
-
-Assigns seats safely
-
-Concurrency Layer
-
-Prevents double booking
-
-Uses row-level locking
-
-Atomic seat updates
-
-Pricing Engine
-
-Calculates fare dynamically
-
-Based on distance
-
-Passenger load factor
-
-Demand multiplier
-
-2) Pooling Algorithm
-Strategy: Greedy Assignment
-
-For each available cab:
-
-Find nearby pending rides
-
-Check seat + luggage capacity
-
-Lock cab row
-
-Deduct seats atomically
-
-Assign ride
-
-Distance Calculation
-
-Uses Haversine Formula to calculate distance between cab and pickup location.
-
-3) Concurrency Handling (Important)
-
-To prevent race conditions:
-
-SELECT ... FOR UPDATE is used
-
-Cab rows are locked before seat deduction
-
-Cancellation restores seats safely
-
-No seat overbooking possible
-
-This ensures correctness even under concurrent requests.
-
-4) Pricing Logic
-
-Fare is calculated as:
-
-Fare = Base Fare + (Distance × Rate per km)
-Adjusted by:
-- Passenger count
-- Demand multiplier
-
-
-Time Complexity: O(1) per ride
-
-5) Algorithm Complexity
-
-Pooling:
-
-O(N × M)
-N = pending rides
-M = available cabs
-
-
-Optimized by:
-
-Filtering in database
-
-Async execution
-
-Reduced in-memory iterations
-
-6) Tech Stack
-
-FastAPI (Async REST API)
-
-PostgreSQL
-
-SQLAlchemy 2.0 (Async)
-
-Row-Level Locks
-
-Python 3.11+
+Python Version: 3.11+
 
 📂 Project Structure
 app/
- ├── main.py
- ├── database.py
- ├── models.py
- ├── schemas.py
- ├── dependencies.py
- │
- ├── routers/
- │     ├── ride.py
- │     └── cab.py
- │
- ├── services/
- │     ├── pooling.py
- │     ├── pricing.py
- │     └── concurrency.py
+│
+├── main.py              # Entry point
+├── database.py          # Database configuration
+├── models.py            # SQLAlchemy models
+├── schemas.py           # Pydantic schemas
+├── dependencies.py      # Dependency injection
+│
+├── routers/
+│   ├── ride.py          # Ride endpoints
+│   └── cab.py           # Cab endpoints
+│
+├── services/
+│   ├── pooling.py       # Ride pooling logic
+│   └── pricing.py       # Pricing logic
+│
+└── concurrency.py       # Row-level locking logic
 
+⚙️ Features
 
-🚀 Running the Project
-1️⃣ Install dependencies
+✅ Create and manage rides
+
+✅ Cab allocation system
+
+✅ Ride pooling logic
+
+✅ Dynamic pricing module
+
+✅ Async database operations
+
+✅ Row-level locking to prevent race conditions
+
+✅ Clean layered architecture (Router → Service → DB)
+
+🛠 Installation
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+
+2️⃣ Create Virtual Environment
+python -m venv venv
+source venv/bin/activate      # Mac/Linux
+venv\Scripts\activate         # Windows
+
+3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-2️⃣ Set environment variable
+🔐 Environment Configuration
 
-Create .env file:
+Create a .env file in the root directory:
 
 DATABASE_URL=postgresql+asyncpg://user:password@localhost/dbname
 
-3️⃣ Run server
+
+Replace:
+
+user → PostgreSQL username
+
+password → PostgreSQL password
+
+dbname → Your database name
+
+Make sure PostgreSQL is running.
+
+▶️ Running the Server
 uvicorn app.main:app --reload
 
 
-Access:
+Server will start at:
 
-API: http://127.0.0.1:8000
+http://127.0.0.1:8000
 
-Docs: http://127.0.0.1:8000/docs
+📖 API Documentation
 
-=>Load Testing
+FastAPI automatically generates interactive API docs:
 
-A load testing script simulates 200 concurrent ride requests.
+🔹 Swagger UI → http://127.0.0.1:8000/docs
 
-python load_test.py
+🔹 ReDoc → http://127.0.0.1:8000/redoc
 
+🧠 Architecture Overview
 
-Demonstrates system stability under concurrent traffic.
+This project follows a clean separation of concerns:
 
-📈 Future Improvements
+Routers → Define API endpoints
 
-Redis caching for cab lookup
+Services → Business logic layer
 
-Background matcher worker
+Models → Database representation
 
-Docker deployment
+Schemas → Request/Response validation
 
-Index optimization for geo queries
+Concurrency Layer → Handles row-level locks for safe ride allocation
 
-Horizontal scaling with multiple workers
+This ensures:
 
-🎯 Why This Implementation Stands Out-
+Scalability
 
-Handles real-world concurrency issues
+Maintainability
 
-Clean modular architecture
+Testability
 
-Separation of concerns (routing / service / DB)
+🔒 Concurrency Handling
 
-Async-first design
+The system uses PostgreSQL row-level locks (SELECT FOR UPDATE) to:
 
-Production-oriented thinking
+Prevent double cab assignment
 
+Avoid race conditions during ride allocation
+
+Maintain consistency under high load
+
+🧪 Future Improvements
+
+Add JWT Authentication
+
+Add Docker support
+
+Add Alembic migrations
+
+Add Redis caching
+
+Add unit & integration tests
+
+CI/CD pipeline
