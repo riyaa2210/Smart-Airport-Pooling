@@ -13,8 +13,11 @@ Language	Python 3.11+
 📂 Project Structure
 app/
 │
+
 ├── main.py              # Application entry point
+
 ├── database.py          # Async database configuration
+
 ├── models.py            # SQLAlchemy models
 ├── schemas.py           # Pydantic schemas
 ├── dependencies.py      # Dependency injection
@@ -113,3 +116,4 @@ Applies row-level locking
 Ensures atomic cab allocation
 
 Prevents double ride assignment
+
