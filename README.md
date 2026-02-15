@@ -10,6 +10,7 @@ ORM	SQLAlchemy 2.0 (Async)
 Driver	asyncpg
 Concurrency	Row-Level Locks
 Language	Python 3.11+
+
 📂 Project Structure
 app/
 │
@@ -19,18 +20,30 @@ app/
 ├── database.py          # Async database configuration
 
 ├── models.py            # SQLAlchemy models
+
 ├── schemas.py           # Pydantic schemas
+
 ├── dependencies.py      # Dependency injection
+
 │
 ├── routers/
+
 │   ├── ride.py          # Ride endpoints
+
 │   └── cab.py           # Cab endpoints
+
 │
+
 ├── services/
+
 │   ├── pooling.py       # Ride pooling logic
+
 │   └── pricing.py       # Pricing engine
+
 │
+
 └── concurrency.py       # Row-level locking logic
+
 
 ⚙️ Key Features
 
@@ -62,7 +75,6 @@ Activate:
 Windows:
 
 venv\Scripts\activate
-
 
 Mac/Linux:
 
@@ -116,4 +128,5 @@ Applies row-level locking
 Ensures atomic cab allocation
 
 Prevents double ride assignment
+
 
