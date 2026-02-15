@@ -1,4 +1,4 @@
-🚖 Async Ride Pooling Backend System
+** Async Ride Pooling Backend System**
 
 A high-performance Ride Pooling Backend built using FastAPI (Async) and PostgreSQL, designed to handle concurrent ride allocation safely using row-level locking.
 
@@ -13,7 +13,7 @@ Language	Python 3.11+
 
 📂 Project Structure
 app/
-│
+
 
 ├── main.py              # Application entry point
 
@@ -128,5 +128,6 @@ Applies row-level locking
 Ensures atomic cab allocation
 
 Prevents double ride assignment
+
 
 
