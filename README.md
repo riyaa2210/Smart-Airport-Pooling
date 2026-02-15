@@ -1,31 +1,6 @@
 🚖 Async Ride Pooling Backend System
 
-A high-performance Ride Pooling Backend System built using FastAPI (Async) and PostgreSQL, designed to handle concurrent ride allocations safely using row-level locking.
-
-This project demonstrates:
-
-Async backend development
-
-Database transaction management
-
-Concurrency control
-
-Clean architecture principles
-
-🧠 Problem Statement
-
-In ride-sharing systems, multiple users may request rides simultaneously.
-Without proper concurrency control, the same cab can be assigned to multiple riders.
-
-This system prevents:
-
-❌ Double cab assignment
-
-❌ Race conditions
-
-❌ Data inconsistency
-
-Using PostgreSQL row-level locks (SELECT FOR UPDATE).
+A high-performance Ride Pooling Backend built using FastAPI (Async) and PostgreSQL, designed to handle concurrent ride allocation safely using row-level locking.
 
 🚀 Tech Stack
 Layer	Technology
@@ -39,9 +14,9 @@ Language	Python 3.11+
 app/
 │
 ├── main.py              # Application entry point
-├── database.py          # Async DB configuration
+├── database.py          # Async database configuration
 ├── models.py            # SQLAlchemy models
-├── schemas.py           # Pydantic request/response schemas
+├── schemas.py           # Pydantic schemas
 ├── dependencies.py      # Dependency injection
 │
 ├── routers/
@@ -56,21 +31,21 @@ app/
 
 ⚙️ Key Features
 
-✅ Async database operations
+Async database operations
 
-✅ Cab allocation system
+Cab allocation system
 
-✅ Ride pooling algorithm
+Ride pooling logic
 
-✅ Pricing module
+Pricing module
 
-✅ Row-level locking for safe transactions
+Row-level locking using SELECT FOR UPDATE
 
-✅ Clean layered architecture (Router → Service → DB)
+Clean layered architecture (Router → Service → DB)
 
-✅ Auto-generated API documentation
+Auto-generated API documentation
 
-🛠 Installation & Setup
+🛠 Setup Instructions
 1️⃣ Clone the Repository
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
@@ -81,12 +56,12 @@ python -m venv venv
 
 Activate:
 
-Windows
+Windows:
 
 venv\Scripts\activate
 
 
-Mac/Linux
+Mac/Linux:
 
 source venv/bin/activate
 
@@ -95,12 +70,12 @@ pip install -r requirements.txt
 
 🔐 Environment Configuration
 
-Create a .env file:
+Create a .env file in the root directory:
 
 DATABASE_URL=postgresql+asyncpg://user:password@localhost/dbname
 
 
-⚠️ Make sure:
+Make sure:
 
 PostgreSQL is running
 
@@ -108,7 +83,7 @@ Database exists
 
 .env is added to .gitignore
 
-▶️ Running the Application
+▶️ Run the Server
 uvicorn app.main:app --reload
 
 
@@ -118,59 +93,23 @@ http://127.0.0.1:8000
 
 📖 API Documentation
 
-FastAPI automatically generates interactive docs:
+Swagger UI:
 
-Swagger UI → http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/docs
 
-ReDoc → http://127.0.0.1:8000/redoc
+
+ReDoc:
+
+http://127.0.0.1:8000/redoc
 
 🔒 Concurrency Handling
 
-To prevent race conditions during cab allocation:
+To prevent race conditions:
 
-Uses PostgreSQL transactions
+Uses database transactions
 
-Applies SELECT ... FOR UPDATE
+Applies row-level locking
 
-Locks rows during ride assignment
+Ensures atomic cab allocation
 
-Ensures atomic operations
-
-This makes the system safe under high concurrent requests.
-
-🏗 Architecture Overview
-Client
-   ↓
-Router Layer (API)
-   ↓
-Service Layer (Business Logic)
-   ↓
-Database Layer (Async ORM)
-   ↓
-PostgreSQL (Row-level Locking)
-
-
-This separation ensures:
-
-Scalability
-
-Maintainability
-
-Testability
-
-📈 Possible Improvements
-
-JWT Authentication
-
-Role-based access control
-
-Redis caching
-
-Docker support
-
-Alembic migrations
-
-Unit & integration tests
-
-Load testing
-
+Prevents double ride assignment
