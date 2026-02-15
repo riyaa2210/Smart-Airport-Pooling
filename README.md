@@ -1,21 +1,8 @@
 ✈️ Smart Airport Pooling – 
+
 📌 Overview-
 
-This project is a backend implementation of a ride pooling system for airport transfers.
-
-The system:
-
-Accepts ride requests
-
-Matches rides to available cabs
-
-Ensures safe concurrent seat allocation
-
-Calculates dynamic fare
-
-Prevents overbooking using database-level locking
-
-Built as part of a Backend Engineer Internship Assignment.
+This project is a backend implementation of a ride pooling system for airport transfers. The system: Accepts ride requests , Matches rides to available cabs , Ensures safe concurrent seat allocation , Calculates dynamic fare , Prevents overbooking using database-level locking , Built as part of a Backend Engineer Internship Assignment.
 
 🏗 System Design-
 1)Core Components
@@ -210,3 +197,4 @@ Separation of concerns (routing / service / DB)
 Async-first design
 
 Production-oriented thinking
+
